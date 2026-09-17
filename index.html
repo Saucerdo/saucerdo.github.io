@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ceuta News | Migration, Politics and Accountability</title>
+
+    <style>
+        :root {
+            --navy: #172b4d;
+            --blue: #294b73;
+            --gold: #c98b4a;
+            --cream: #f4f1ec;
+            --white: #ffffff;
+            --text: #222222;
+            --muted: #6d6d6d;
+            --border: #dedbd5;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        header {
+            background:
+                linear-gradient(rgba(23, 43, 77, 0.86), rgba(23, 43, 77, 0.86)),
+                url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=85")
+                center/cover;
+            color: white;
+            padding: 75px 20px;
+            text-align: center;
+        }
+
+        header .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 13px;
+            color: #e7c79f;
+        }
+
+        header h1 {
+            font-size: clamp(38px, 7vw, 76px);
+            line-height: 1.1;
+            margin: 15px 0;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 19px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: white;
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav button {
+            border: none;
+            background: transparent;
+            color: var(--navy);
+            padding: 11px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        nav button:hover,
+        nav button.active {
+            background: var(--gold);
+            color: white;
+        }
+
+        main {
+            max-width: 1250px;
+            margin: 40px auto;
+            padding: 0 22px;
+        }
+
+        .page-section {
+            display: none;
+            animation: appear 0.35s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .section-heading {
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            color: var(--navy);
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 800px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .hero-story {
+            min-height: 390px;
+            padding: 35px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            background:
+                linear-gradient(transparent, rgba(0,0,0,0.85)),
+                url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=85")
+                center/cover;
+        }
+
+        .hero-story h2 {
+            font-size: 38px;
+            line-height: 1.15;
+            margin: 10px 0;
+        }
+
+        .hero-story p {
+            max-width: 650px;
+        }
+
+        .side-story {
+            background: white;
+            padding: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .side-story h3 {
+            color: var(--navy);
+            font-size: 27px;
+            line-height: 1.25;
+        }
+
+        .tag {
+            display: inline-block;
+            width: fit-content;
+            background: #ead8c2;
+            color: #69451f;
+            padding: 4px 9px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .story-card {
+            background: white;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .story-card img {
+            width: 100%;
+            height: 205px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .story-content {
+            padding: 23px;
+        }
+
+        .story-content h3 {
+            color: var(--navy);
+            font-size: 24px;
+            line-height: 1.25;
+            margin: 12px 0;
+        }
+
+        .story-content p {
+            color: #555;
+        }
+
+        .read-button,
+        .back-button {
+            border: none;
+            background: var(--navy);
+            color: white;
+            padding: 11px 17px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .read-button:hover,
+        .back-button:hover {
+            background: var(--gold);
+        }
+
+        .article-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .article-body,
+        .sidebar-box,
+        .source-box,
+        .faq-box {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .article-body h2 {
+            color: var(--navy);
+            font-size: 38px;
+            line-height: 1.2;
+        }
+
+        .article-body h3 {
+            color: var(--blue);
+            font-size: 25px;
+            margin-top: 30px;
+        }
+
+        .article-body img {
+            width: 100%;
+            max-height: 430px;
+            object-fit: cover;
+            margin: 20px 0;
+        }
+
+        .sidebar-box h3 {
+            color: var(--navy);
+            margin-top: 0;
+        }
+
+        .sidebar-box ul {
+            padding-left: 20px;
+        }
+
+        .highlight {
+            border-left: 5px solid var(--gold);
+            background: #faf5ee;
+            padding: 18px 22px;
+            margin: 25px 0;
+        }
+
+        .timeline {
+            border-left: 3px solid var(--gold);
+            margin: 30px 0;
+            padding-left: 25px;
+        }
+
+        .timeline-item {
+            position: relative;
+            background: white;
+            border: 1px solid var(--border);
+            padding: 23px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--gold);
+            left: -34px;
+            top: 30px;
+        }
+
+        .timeline-item h3 {
+            color: var(--navy);
+            margin-top: 0;
+        }
+
+        .search-area {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 28px;
+        }
+
+        .search-area input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #bbb;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin: 30px 0;
+        }
+
+        .fact {
+            background: var(--navy);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .fact strong {
+            display: block;
+            font-size: 34px;
+            color: #e7c79f;
+        }
+
+        .fact span {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--border);
+            padding: 17px 0;
+        }
+
+        summary {
+            cursor: pointer;
+            color: var(--navy);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 45px 25px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        footer h3 {
+            color: #e7c79f;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        .notice {
+            background: #fff6dd;
+            border: 1px solid #e6c879;
+            padding: 18px;
+            margin: 25px 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid,
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 50px 20px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-story h2 {
+                font-size: 30px;
+            }
+
+            .facts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .article-body,
+            .sidebar-box,
+            .source-box {
+                padding: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="eyebrow">Independent editorial project</div>
+    <h1>CEUTA NEWS</h1>
+    <p>
+        Migration, politics, public policy and accountability at the southern
+        European border.
+    </p>
+</header>
+
+<nav>
+    <button class="nav-button active" data-section="home">Home</button>
+    <button class="nav-button" data-section="migration">Migration</button>
+    <button class="nav-button" data-section="politics">Politics</button>
+    <button class="nav-button" data-section="analysis">Analysis</button>
+    <button class="nav-button" data-section="timeline">Timeline</button>
+    <button class="nav-button" data-section="sources">Sources</button>
+</nav>
+
+<main>
+
+    <!-- HOME -->
+    <section id="home" class="page-section active">
+
+        <div class="hero-grid">
+            <div class="hero-story">
+                <span class="tag">Main investigation</span>
+                <h2>Ceuta and the politics of the border</h2>
+                <p>
+                    A long-form editorial project exploring migration policy,
+                    institutional responsibility and the political debate
+                    surrounding Ceuta.
+                </p>
+                <button class="read-button" data-open="migration">
+                    Explore the migration section
+                </button>
+            </div>
+
+            <div class="side-story">
+                <span class="tag">Editorial focus</span>
+                <h3>What happens when a border becomes a political symbol?</h3>
+                <p>
+                    Ceuta is both a European territory and a North African
+                    city. Its geography makes it a key location for debates
+                    about migration, security, humanitarian protection and
+                    relations between Spain, Morocco and the European Union.
+                </p>
+                <button class="read-button" data-open="analysis">
+                    Read the analysis
+                </button>
+            </div>
+        </div>
+
+        <div class="section-heading">
+            <h2>Latest editorial sections</h2>
+            <p>
+                Browse the main subjects covered by Ceuta News. The articles
+                below are structured as editorial drafts and should be updated
+                with verified reporting before publication.
+            </p>
+        </div>
+
+        <div class="search-area">
+            <input
+                type="search"
+                id="articleSearch"
+                placeholder="Search articles by topic..."
+            >
+        </div>
+
+        <div class="articles-grid" id="articleGrid">
+
+            <article class="story-card" data-keywords="migration border humanitarian people">
+                <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=85" alt="People walking near a coast">
+                <div class="story-content">
+                    <span class="tag">Migration</span>
+                    <h3>Migration routes and humanitarian questions</h3>
+                    <p>
+                        How geography, border controls and humanitarian
+                        responsibilities shape the situation in Ceuta.
+                    </p>
+                    <button class="read-button" data-open="migration">
+                        Read more
+                    </button>
+                </div>
+            </article>
+
+            <article class="story-card" data-keywords="politics government psoe parliament">
+                <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=85" alt="Political building">
+                <div class="story-content">
+                    <span class="tag">Politics</span>
+                    <h3>Government decisions and political pressure</h3>
+                    <p>
+                        A space to examine public decisions, parliamentary
+                        debate and competing political explanations.
+                    </p>
+                    <button class="read-button" data-open="politics">
+                        Read more
+                    </button>
+                </div>
+            </article>
+
+            <article class="story-card" data-keywords="analysis accountability corruption evidence">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=85" alt="Documents on a desk">
+                <div class="story-content">
+                    <span class="tag">Analysis</span>
+                    <h3>Accountability, allegations and evidence</h3>
+                    <p>
+                        How to distinguish confirmed facts, allegations,
+                        investigations and political commentary.
+                    </p>
+                    <button class="read-button" data-open="analysis">
+                        Read more
+                    </button>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="facts-grid">
+            <div class="fact">
+                <strong>01</strong>
+                <span>Migration and borders</span>
+            </div>
+
+            <div class="fact">
+                <strong>02</strong>
+                <span>Government policy</span>
+            </div>
+
+            <div class="fact">
+                <strong>03</strong>
+                <span>Public accountability</span>
+            </div>
+
+            <div class="fact">
+                <strong>04</strong>
+                <span>Verified sources</span>
+            </div>
+        </div>
+
+        <div class="notice">
+            <strong>Editorial note:</strong>
+            This website is a publication template. Any claim about corruption,
+            misconduct, political responsibility or migration figures should
+            be supported by reliable documents, official data or reputable
+            journalism.
+        </div>
+
+    </section>
+
+    <!-- MIGRATION -->
+    <section id="migration" class="page-section">
+
+        <div class="section-heading">
+            <h2>Migration</h2>
+            <p>
+                The geography of Ceuta creates a complex intersection between
+                migration, border management, humanitarian protection and
+                international relations.
+            </p>
+        </div>
+
+        <div class="article-layout">
+            <div class="article-body">
+                <img
+                    src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85"
+                    alt="Coastline and sea"
+                >
+
+                <h2>The border as a human and political issue</h2>
+
+                <p>
+                    Ceuta is located on the North African coast and is part of
+                    Spain. Its location makes it one of the places where
+                    European migration policy becomes visible in everyday
+                    life.
+                </p>
+
+                <p>
+                    Migration to Ceuta can involve people with different
+                    backgrounds and legal situations. Some may seek
+                    international protection, while others may be attempting
+                    to enter European territory for economic, family or
+                    personal reasons.
+                </p>
+
+                <h3>Key questions for reporting</h3>
+
+                <ul>
+                    <li>How are people intercepted, registered and assisted?</li>
+                    <li>What legal procedures apply after arrival?</li>
+                    <li>What responsibilities belong to Spain and the European Union?</li>
+                    <li>How are children and other vulnerable people protected?</li>
+                    <li>How do border agreements affect people on the ground?</li>
+                </ul>
+
+                <div class="highlight">
+                    Migration reporting should avoid treating all migrants as
+                    one group. Legal status, age, nationality, personal
+                    circumstances and protection needs can differ significantly.
+                </div>
+
+                <h3>Humanitarian and legal dimensions</h3>
+
+                <p>
+                    Any serious examination of migration policy should consider
+                    access to asylum procedures, protection against unlawful
+                    returns, reception conditions, the treatment of minors and
+                    the role of courts and monitoring organisations.
+                </p>
+
+                <p>
+                    A balanced article should present official explanations,
+                    testimony from affected people, independent experts and
+                    available legal documentation.
+                </p>
+
+                <button class="back-button" data-open="home">
+                    ← Back to home
+                </button>
+            </div>
+
+            <aside>
+                <div class="sidebar-box">
+                    <h3>Migration checklist</h3>
+                    <ul>
+                        <li>Verify dates and locations.</li>
+                        <li>Distinguish arrivals from asylum applications.</li>
+                        <li>Identify official statistics.</li>
+                        <li>Protect the privacy of vulnerable people.</li>
+                        <li>Separate facts from political statements.</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Suggested reporting sources</h3>
+                    <p>Official institutions, humanitarian organisations, court documents, local reporting and academic research.</p>
+                </div>
+            </aside>
+        </div>
+
+    </section>
+
+    <!-- POLITICS -->
+    <section id="politics" class="page-section">
+
+        <div class="section-heading">
+            <h2>Politics</h2>
+            <p>
+                An examination of government decisions, parliamentary debate,
+                party strategy and the political consequences of border policy.
+            </p>
+        </div>
+
+        <div class="article-layout">
+            <div class="article-body">
+                <img
+                    src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=85"
+                    alt="Political institution"
+                >
+
+                <h2>The Spanish government and the Ceuta debate</h2>
+
+                <p>
+                    Migration policy is influenced by several institutions:
+                    the Spanish government, the Ministry of the Interior,
+                    regional and local authorities, courts, European
+                    institutions and neighbouring governments.
+                </p>
+
+                <p>
+                    Political coverage should explain which institution made
+                    each decision, what legal authority it had and what
+                    consequences were documented afterward.
+                </p>
+
+                <h3>The role of political parties</h3>
+
+                <p>
+                    Parties may differ over border controls, cooperation with
+                    Morocco, reception systems, European solidarity,
+                    deportation procedures and the treatment of minors.
+                </p>
+
+                <p>
+                    When discussing the PSOE or any other party, articles
+                    should distinguish between official policy, statements by
+                    individual politicians, internal disagreements and claims
+                    made by opponents.
+                </p>
+
+                <h3>How to investigate a political decision</h3>
+
+                <ol>
+                    <li>Identify the exact decision and its date.</li>
+                    <li>Find the official document or announcement.</li>
+                    <li>Explain the legal and institutional context.</li>
+                    <li>Compare the government's explanation with independent evidence.</li>
+                    <li>Describe documented consequences without exaggeration.</li>
+                </ol>
+
+                <div class="highlight">
+                    Political criticism is strongest when it is connected to
+                    specific decisions, documents, dates and measurable effects.
+                </div>
+
+                <button class="back-button" data-open="home">
+                    ← Back to home
+                </button>
+            </div>
+
+            <aside>
+                <div class="sidebar-box">
+                    <h3>Political topics</h3>
+                    <ul>
+                        <li>Border agreements</li>
+                        <li>Migration legislation</li>
+                        <li>European cooperation</li>
+                        <li>Local government</li>
+                        <li>Parliamentary oversight</li>
+                        <li>Party strategy</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Important distinction</h3>
+                    <p>
+                        An allegation, an investigation, an indictment and a
+                        conviction are different stages and should never be
+                        presented as interchangeable.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+    </section>
+
+    <!-- ANALYSIS -->
+    <section id="analysis" class="page-section">
+
+        <div class="section-heading">
+            <h2>Analysis</h2>
+            <p>
+                Contextual reporting about responsibility, public spending,
+                institutional decisions and the quality of available evidence.
+            </p>
+        </div>
+
+        <div class="article-layout">
+            <div class="article-body">
+                <img
+                    src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=85"
+                    alt="Documents and notes"
+                >
+
+                <h2>Accountability requires evidence</h2>
+
+                <p>
+                    Political debate often includes strong accusations.
+                    Responsible journalism must establish what is known,
+                    what is alleged and what remains uncertain.
+                </p>
+
+                <h3>Questions about public administration</h3>
+
+                <p>
+                    Analysis may examine procurement, public contracts,
+                    institutional transparency, emergency decisions,
+                    budget priorities and the implementation of government
+                    programmes.
+                </p>
+
+                <p>
+                    A report about alleged corruption should identify the
+                    source of the allegation, explain whether an official
+                    investigation exists and provide the response of the
+                    people or institutions concerned.
+                </p>
+
+                <h3>Possible investigative themes</h3>
+
+                <ul>
+                    <li>Transparency of public contracts.</li>
+                    <li>Use of emergency procedures.</li>
+                    <li>Public spending connected to migration management.</li>
+                    <li>Oversight by courts and audit institutions.</li>
+                    <li>Differences between announced and implemented policy.</li>
+                    <li>Effects on residents, migrants and public services.</li>
+                </ul>
+
+                <div class="highlight">
+                    This publication should not describe an accusation as a
+                    proven fact unless a reliable authority or documented
+                    evidence establishes it.
+                </div>
+
+                <h3>Questions for readers</h3>
+
+                <p>
+                    What evidence supports a claim? Which institutions have
+                    investigated it? What alternative explanations exist? What
+                    are the documented consequences for the people affected?
+                </p>
+
+                <button class="back-button" data-open="home">
+                    ← Back to home
+                </button>
+            </div>
+
+            <aside>
+                <div class="sidebar-box">
+                    <h3>Evidence levels</h3>
+                    <ul>
+                        <li>Officially documented fact</li>
+                        <li>Independent reporting</li>
+                        <li>Expert interpretation</li>
+                        <li>Political allegation</li>
+                        <li>Unverified claim</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Editorial standard</h3>
+                    <p>
+                        Use precise language. Attribute claims. Include dates.
+                        Link to documents. Correct errors openly.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="timeline" class="page-section">
+
+        <div class="section-heading">
+            <h2>Timeline</h2>
+            <p>
+                A structure for organising major events. Add verified dates,
+                official documents and links before publishing.
+            </p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <h3>Background: Ceuta's geographical position</h3>
+                <p>
+                    Ceuta's location connects European institutions, North
+                    African geography and the wider Mediterranean migration
+                    route.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Border policy and bilateral cooperation</h3>
+                <p>
+                    Relations between Spain and Morocco influence border
+                    management, movement and political debate.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Humanitarian response</h3>
+                <p>
+                    Reception, emergency assistance, legal protection and the
+                    treatment of minors should be documented separately.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Political and institutional reaction</h3>
+                <p>
+                    Record statements from the government, opposition parties,
+                    local authorities, courts and independent organisations.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Follow-up and accountability</h3>
+                <p>
+                    Track investigations, parliamentary questions, audits,
+                    court decisions and policy changes over time.
+                </p>
+            </div>
+
+        </div>
+
+        <button class="back-button" data-open="home">
+            ← Back to home
+        </button>
+
+    </section>
+
+    <!-- SOURCES -->
+    <section id="sources" class="page-section">
+
+        <div class="section-heading">
+            <h2>Sources and methodology</h2>
+            <p>
+                Reliable reporting requires transparent sourcing and a clear
+                distinction between fact, analysis and allegation.
+            </p>
+        </div>
+
+        <div class="source-box">
+            <h3>Useful institutional sources</h3>
+
+            <ul>
+                <li>
+                    <a href="https://www.lamoncloa.gob.es/" target="_blank">
+                        Spanish Government — La Moncloa
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.interior.gob.es/" target="_blank">
+                        Spanish Ministry of the Interior
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://european-union.europa.eu/" target="_blank">
+                        European Union
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.unhcr.org/" target="_blank">
+                        UN Refugee Agency
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.amnesty.org/" target="_blank">
+                        Amnesty International
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="faq-box">
+            <h3>Frequently asked questions</h3>
+
+            <details>
+                <summary>How should an allegation be described?</summary>
+                <p>
+                    Identify who made the allegation, explain whether an
+                    investigation exists and include the response of the
+                    person or institution concerned.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can political statements be used as evidence?</summary>
+                <p>
+                    Political statements are evidence of what a politician
+                    said, but they do not automatically prove that the claim
+                    itself is true.
+                </p>
+            </details>
+
+            <details>
+                <summary>How should migration figures be presented?</summary>
+                <p>
+                    Include the date, geographic area, definition and original
+                    source. Do not confuse arrivals, interceptions, asylum
+                    applications and returns.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can photographs be used freely?</summary>
+                <p>
+                    Check the licence and usage conditions of every photograph.
+                    The images currently used on this template are illustrative
+                    links and should be replaced with properly licensed images.
+                </p>
+            </details>
+        </div>
+
+        <button class="back-button" data-open="home">
+            ← Back to home
+        </button>
+
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h3>Ceuta News</h3>
+            <p>
+                An independent editorial project focused on migration,
+                politics, public policy and accountability.
+            </p>
+        </div>
+
+        <div>
+            <h3>Sections</h3>
+            <p><a href="#" data-open="migration">Migration</a></p>
+            <p><a href="#" data-open="politics">Politics</a></p>
+            <p><a href="#" data-open="analysis">Analysis</a></p>
+        </div>
+
+        <div>
+            <h3>Editorial principle</h3>
+            <p>
+                Be precise, verify claims and distinguish facts from opinions.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const navButtons = document.querySelectorAll(".nav-button");
+    const sections = document.querySelectorAll(".page-section");
+    const openButtons = document.querySelectorAll("[data-open]");
+    const searchInput = document.getElementById("articleSearch");
+    const articleCards = document.querySelectorAll(".story-card");
+
+    function showSection(sectionId) {
+        sections.forEach(section => {
+            section.classList.remove("active");
+        });
+
+        const selectedSection = document.getElementById(sectionId);
+
+        if (selectedSection) {
+            selectedSection.classList.add("active");
+        }
+
+        navButtons.forEach(button => {
+            button.classList.remove("active");
+
+            if (button.dataset.section === sectionId) {
+                button.classList.add("active");
+            }
+        });
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            showSection(button.dataset.section);
+        });
+    });
+
+    openButtons.forEach(button => {
+        button.addEventListener("click", event => {
+            event.preventDefault();
+            showSection(button.dataset.open);
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            articleCards.forEach(card => {
+                const keywords = card.dataset.keywords.toLowerCase();
+                const text = card.innerText.toLowerCase();
+
+                if (
+                    keywords.includes(searchTerm) ||
+                    text.includes(searchTerm)
+                ) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
