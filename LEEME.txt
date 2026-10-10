@@ -1,0 +1,11 @@
+CEUTA NEWS - VERSION MULTIPAGINA
+
+1. Descomprime todos los archivos.
+2. En GitHub, abre el repositorio saucerdo.github.io.
+3. Sube/reemplaza los archivos HTML y styles.css en la raíz del repositorio.
+4. Mantén googleeaf31ca53b049d8a.html si sigue siendo tu archivo de verificación de Search Console.
+5. Comprueba cada página publicada desde el navegador.
+6. En Search Console, envía sitemap.xml y solicita indexación de las páginas principales.
+7. IMPORTANTE: no hay garantía de aprobación de AdSense. La calidad editorial y la originalidad deben mantenerse con publicaciones reales y actualizaciones comprobadas.
+8. PRIVACIDAD: revisa la configuración de consentimiento en AdSense. Para anuncios personalizados a usuarios del EEE/Reino Unido/Suiza, Google exige una CMP certificada integrada con TCF. La página de privacidad por sí sola no implementa la CMP.
+9. No publiques datos personales adicionales.
